@@ -73,7 +73,7 @@ class ThreeJSPanel extends LitElement {
     //     {diameter: 2, segments: 32}, scene);
     // Move the sphere upward 1/2 its height
     // sphere.position.y = 1;
-    const importResult = await SceneLoader.ImportMeshAsync("sailboat", "https://ha-dashboard.agatha.boats/assets/", "sailboat.obj", scene, null, "obj");
+    const importResult = await SceneLoader.ImportMeshAsync("sailboat", "https://ha-dashboard.agatha.boats/assets/", "sailboat.obj", scene, null, ".obj");
     // Built-in 'ground' shape.
     // const ground = BABYLON.MeshBuilder.CreateGround("ground",
     //     {width: 6, height: 6}, scene);
