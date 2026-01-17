@@ -80,4 +80,4 @@ class ThreeJSPanel extends LitElement {
     return this.scene;
   }
 }
-customElements.define("sudo-dashboard", ThreeJSPanel);
+customElements.define("threejs-dashboard", ThreeJSPanel);
