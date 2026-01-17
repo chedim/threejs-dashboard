@@ -8,8 +8,9 @@ import {
 import "babylonjs";
 import { SceneLoader } from "@babylonjs/core";
 import "@babylonjs/loaders/OBJ";
+import "@babylonjs/core/Loading/loadingScreen";
 
-class SudoPanel extends LitElement {
+class ThreeJSPanel extends LitElement {
   static get properties() {
     return {
       hass: { type: Object },
@@ -27,15 +28,16 @@ class SudoPanel extends LitElement {
     this.canvas = document.createElement("canvas");
     const engine = this.engine = new BABYLON.Engine(this.canvas, true, null, true);
 
-    const scene = this.createScene(); //Call the createScene function
-    // Register a render loop to repeatedly render the scene
-    this.engine.runRenderLoop(function () {
-      scene.render();
-    });
-    // Watch for browser/canvas resize events
-    window.addEventListener("resize", function () {
-      engine.resize();
-    });
+    this.createScene().then((scene) => {
+      // Register a render loop to repeatedly render the scene
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+      // Watch for browser/canvas resize events
+      window.addEventListener("resize", function () {
+        engine.resize();
+      });
+    }); //Call the createScene function
   }
 
   render() {
@@ -52,7 +54,7 @@ class SudoPanel extends LitElement {
     `;
   }
 
-  createScene() {
+  async createScene() {
     // Creates a basic Babylon Scene object
     const scene = this.scene = new BABYLON.Scene(this.engine);
     // Creates and positions a free camera
@@ -71,11 +73,11 @@ class SudoPanel extends LitElement {
     //     {diameter: 2, segments: 32}, scene);
     // Move the sphere upward 1/2 its height
     // sphere.position.y = 1;
-    SceneLoader.Append("https://ha-dashboard.sudo.boats/assets/", "sailboat.obj", scene, null, "obj", "sailboat");
+    const importResult = await SceneLoader.ImportMeshAsync("sailboat", "https://ha-dashboard.agatha.boats/assets/", "sailboat.obj", scene, null, "obj");
     // Built-in 'ground' shape.
     // const ground = BABYLON.MeshBuilder.CreateGround("ground",
     //     {width: 6, height: 6}, scene);
     return this.scene;
   }
 }
-customElements.define("sudo-dashboard", SudoPanel);
+customElements.define("sudo-dashboard", ThreeJSPanel);
