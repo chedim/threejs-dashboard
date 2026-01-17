@@ -29,9 +29,9 @@
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "@babylonjs/core": "^7.37.1",
-    "@babylonjs/loaders": "^7.37.1",
-    "babylonjs": "^7.31.0",
+    "babylonjs": "^7.31.1",
+    "@babylonjs/core": "^7.31.1",
+    "@babylonjs/loaders": "^7.31.1",
     "lit-element": "^4.1.1",
     "wired-card": "^2.1.0"
   }
