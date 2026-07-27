@@ -10,6 +10,14 @@ import { SceneLoader } from "@babylonjs/core";
 import "@babylonjs/loaders/OBJ";
 import "@babylonjs/core/Loading/loadingScreen";
 
+const isLocal = window.location.href.includes("-local");
+var assetUrl = "https://ha-dashboard.agatha.boats/assets/";
+var localTag = "";
+if (isLocal) {
+    assetUrl = "http://localhost:5173/assets/";
+    localTag = "-local";
+}
+
 class ThreeJSPanel extends LitElement {
   static get properties() {
     return {
@@ -38,6 +46,7 @@ class ThreeJSPanel extends LitElement {
         engine.resize();
       });
     }); //Call the createScene function
+    console.log("Constructed threejs-ha-dashboard");
   }
 
   render() {
@@ -69,15 +78,19 @@ class ThreeJSPanel extends LitElement {
     // Dim the light a small amount - 0 to 1
     light.intensity = 0.7;
     // Built-in 'sphere' shape.
-    // const sphere = BABYLON.MeshBuilder.CreateSphere("sphere",
-    //     {diameter: 2, segments: 32}, scene);
+     const sphere = BABYLON.MeshBuilder.CreateSphere("sphere",
+         {diameter: 2, segments: 32}, scene);
     // Move the sphere upward 1/2 its height
-    // sphere.position.y = 1;
-    const importResult = await SceneLoader.ImportMeshAsync("sailboat", "https://ha-dashboard.agatha.boats/assets/", "sailboat.obj", scene, null, ".obj");
+     sphere.position.y = 1;
+    console.info("made a sphere");
+    const importResult = await SceneLoader.ImportMeshAsync("sailboat", assetUrl, "Vagabond.mtl", scene, null, ".obj");
+    console.info("Loaded sailboat model, importResult:", importResult);
     // Built-in 'ground' shape.
-    // const ground = BABYLON.MeshBuilder.CreateGround("ground",
-    //     {width: 6, height: 6}, scene);
+     const ground = BABYLON.MeshBuilder.CreateGround("ground",
+         {width: 6, height: 6}, scene);
+    console.info("created the ground");
     return this.scene;
   }
 }
-customElements.define("threejs-dashboard", ThreeJSPanel);
+customElements.define("threejs-dashboard" + localTag, ThreeJSPanel);
+console.log("threejs-ha-dashboard loaded");

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx browserify -p esmify src/main.js > dist/threejs-dashboard.js",
+    "build": "mkdir -p dist && rsync --delete -r assets dist/ && npx browserify -p esmify src/main.js > dist/threejs-dashboard.js",
     "run": "npx vite"
   },
   "repository": {

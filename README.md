@@ -1,3 +1,3 @@
-# jscad-dashboard
+# threejs-dashboard
 
-A dashboard with JsCad
+A dashboard with ThreeJS

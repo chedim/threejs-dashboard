@@ -2,6 +2,8 @@ FROM node:latest
 
 WORKDIR /app
 
+RUN apt update
+RUN apt -y install rsync
 RUN npm install vite
 COPY src src
 COPY assets assets
